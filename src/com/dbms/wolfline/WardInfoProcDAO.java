@@ -19,7 +19,6 @@ public class WardInfoProcDAO {
 	public static int executeInsert(String query, Ward ward) {
 
 		int result = -1;
-		int count = -1;
 
 		if (connection == null) {
 			System.err.println("No connection to the database exists.");
@@ -40,7 +39,7 @@ public class WardInfoProcDAO {
 			System.out.println("Executing query failed.");
 		}
 
-		return count;
+		return result;
 	}
 	
 	public static ResultSet queryDatabase(String query) {
@@ -91,5 +90,11 @@ public class WardInfoProcDAO {
 	public static void printUpdateResults(int res) {
 		// TODO Auto-generated method stub
 		System.out.println("No of rows affected"+res);
+	}
+
+	public static int deleteRecord(String wardNo) {
+		
+		
+		return 0;
 	}
 }
