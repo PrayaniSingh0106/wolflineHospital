@@ -70,16 +70,9 @@ public class WardInfoProcess {
 			Scanner in = new Scanner(System.in);
 			System.out.println("Enter the ward_number of the ward you want to delete: ");
 			ward.setWardNo(in.nextLine());
-			/*
-			 * String query = "SELECT * from ward where ward_no =" + ward.getWardNo();
-			 * ResultSet result = WardInfoProcDAO.queryDatabase(query);
-			 * 
-			 * if (result.next()) { // wardNo = result.getString("ward_no");
-			 */
-			WardInfoProcDAO.deleteRecord(ward.getWardNo());
-
+			
 			String queryDel = "DELETE from ward WHERE ward_no = " + ward.getWardNo();
-			int result = QueryExecutor.updateDatabase(queryDel);
+			int result = WardInfoProcDAO.updateDatabase(queryDel);
 
 			if (result == 0) {
 				System.out.println("No such ward exsist.\n");
