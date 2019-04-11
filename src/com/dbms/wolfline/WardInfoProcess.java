@@ -3,8 +3,6 @@ package com.dbms.wolfline;
 import java.sql.ResultSet;
 import java.util.Scanner;
 
-import BillAcc.QueryExecutor;
-
 public class WardInfoProcess {
 
 	public static void TaskMenu() {
@@ -96,7 +94,7 @@ public class WardInfoProcess {
 			System.out.println("Enter the ward_number of the ward you want to update: ");
 			ward.setWardNo(in.nextLine());
 
-			String query = "SELECT * from patient where id =" + ward.getWardNo();
+			String query = "SELECT * from ward where id =" + ward.getWardNo();
 			ResultSet result = WardInfoProcDAO.queryDatabase(query);
 
 			String wardNo, capacity, cost, responsible_nurse;
