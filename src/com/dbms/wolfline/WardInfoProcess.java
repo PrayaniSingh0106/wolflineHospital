@@ -3,6 +3,8 @@ package com.dbms.wolfline;
 import java.sql.ResultSet;
 import java.util.Scanner;
 
+import BillAcc.QueryExecutor;
+
 public class WardInfoProcess {
 
 	public static void TaskMenu() {
@@ -62,7 +64,34 @@ public class WardInfoProcess {
 
 	private static void deleteWard() {
 		// TODO Auto-generated method stub
+		try {
 
+			Ward ward = new Ward();
+			Scanner in = new Scanner(System.in);
+			System.out.println("Enter the ward_number of the ward you want to delete: ");
+			ward.setWardNo(in.nextLine());
+			/*
+			 * String query = "SELECT * from ward where ward_no =" + ward.getWardNo();
+			 * ResultSet result = WardInfoProcDAO.queryDatabase(query);
+			 * 
+			 * if (result.next()) { // wardNo = result.getString("ward_no");
+			 */
+			WardInfoProcDAO.deleteRecord(ward.getWardNo());
+
+			String queryDel = "DELETE from ward WHERE ward_no = " + ward.getWardNo();
+			int result = QueryExecutor.updateDatabase(queryDel);
+
+			if (result == 0) {
+				System.out.println("No such ward exsist.\n");
+			} else {
+				System.out.println(result + " number of row(s) affected.\n");
+			}
+
+			in.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void updateWard() {
@@ -71,7 +100,7 @@ public class WardInfoProcess {
 
 			Ward ward = new Ward();
 			Scanner in = new Scanner(System.in);
-			System.out.println("Enter the ward_number of the ward you want to update");
+			System.out.println("Enter the ward_number of the ward you want to update: ");
 			ward.setWardNo(in.nextLine());
 
 			String query = "SELECT * from patient where id =" + ward.getWardNo();
@@ -103,7 +132,8 @@ public class WardInfoProcess {
 				System.out.println("Enter the new name:");
 				cost = in.nextLine();
 			}
-			System.out.println("Old value for responsible_nurse:" + responsible_nurse);
+			System.out.println("Old value for responsible_nurse:" + responsible_nurse); // Is it okay to use String when
+																						// DB is int?
 			System.out.println("Do you want to update it?");
 			y_n = in.nextLine();
 			if (y_n.equals("y") || y_n.equals("Y")) {
