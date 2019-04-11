@@ -35,13 +35,34 @@ public class PatientInfoProcess {
 
 	private static void deletePatient() {
 		// TODO Auto-generated method stub
-		
+
+		try {
+
+			Patient patient = new Patient();
+			Scanner in = new Scanner(System.in);
+			System.out.println("Enter the patient's Id of the patient you want to delete: ");
+			patient.setId(in.nextLine());
+
+			String queryDel = "DELETE from patient WHERE id = " + patient.getId();
+			int result = PatientInfoProcDAO.updateDatabase(queryDel);
+
+			if (result == 0) {
+				System.out.println("No such ward exsist.\n");
+			} else {
+				System.out.println(result + " number of row(s) affected.\n");
+			}
+
+			in.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void updatePatient() {
 		// TODO Auto-generated method stub
-	try {
-			
+		try {
+
 			Patient patient = new Patient();
 			Scanner in = new Scanner(System.in);
 			System.out.println("Enter the ID of the patient you want to update");
@@ -155,21 +176,21 @@ public class PatientInfoProcess {
 
 	private static void enterNewPatient() {
 		// TODO Auto-generated method stub
-		//id                   | int(11)      | NO   | PRI | NULL    |       |
-		//	| ssn                  | varchar(20)  | NO   |     | NULL    |       |
-		//	| name                 | varchar(20)  | NO   |     | NULL    |       |
-		//	| dob                  | date         | NO   |     | NULL    |       |
-		//	| gender               | char(1)      | NO   |     | NULL    |       |
-		//	| phone                | varchar(15)  | YES  |     | NULL    |       |
-		//	| address              | varchar(100) | YES  |     | NULL    |       |
-		//	| treatment_plan       | varchar(100) | YES  |     | NULL    |       |
-		//	| in_ward              | int(11)      | YES  |     | NULL    |       |
-		//	| Completing_treatment | varchar(3)   | YES  |     | NULL   
-		
+		// id | int(11) | NO | PRI | NULL | |
+		// | ssn | varchar(20) | NO | | NULL | |
+		// | name | varchar(20) | NO | | NULL | |
+		// | dob | date | NO | | NULL | |
+		// | gender | char(1) | NO | | NULL | |
+		// | phone | varchar(15) | YES | | NULL | |
+		// | address | varchar(100) | YES | | NULL | |
+		// | treatment_plan | varchar(100) | YES | | NULL | |
+		// | in_ward | int(11) | YES | | NULL | |
+		// | Completing_treatment | varchar(3) | YES | | NULL
+
 		try {
-			
+
 			Patient patient = new Patient();
-			
+
 			Scanner in = new Scanner(System.in);
 			System.out.println("Enter the ID of the patient: ");
 			String id = in.nextLine();
@@ -192,7 +213,7 @@ public class PatientInfoProcess {
 			patient.setIn_ward(Integer.parseInt(in.nextLine()));
 			System.out.println("Enter the Completing_treatment of the patient: ");
 			patient.setTreatment_plan(in.nextLine());
-			
+
 			/*
 			 * if(patient_id==null||patient_ssn==null||patient_name==null||patient_dob==null
 			 * ||patient_gender==null) { System.out.
@@ -201,13 +222,13 @@ public class PatientInfoProcess {
 			 * 
 			 * }
 			 */
-			
-					String query="INSERT INTO patient(id, ssn, name, dob, gender, phone, address, treatment_plan, completing_treatment) VALUES(?,?,?,?,?,?,?,?,?)";
-					int result = PatientInfoProcDAO.executeInsert(query, patient); 
-					PatientInfoProcDAO.printUpdateResults(result);
-			}
-			
-		catch(Exception e) {
+
+			String query = "INSERT INTO patient(id, ssn, name, dob, gender, phone, address, treatment_plan, completing_treatment) VALUES(?,?,?,?,?,?,?,?,?)";
+			int result = PatientInfoProcDAO.executeInsert(query, patient);
+			PatientInfoProcDAO.printUpdateResults(result);
+		}
+
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
