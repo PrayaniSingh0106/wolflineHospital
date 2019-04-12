@@ -41,13 +41,13 @@ public class WardInfoProcess {
 
 			Scanner in = new Scanner(System.in);
 			System.out.println("Enter the ward numer: ");
-			ward.setWardNo((in.nextLine()));
+			ward.setWardNo((in.nextInt()));
 			System.out.println("Enter the ssn of the patient: ");
-			ward.setCapacity((in.nextLine()));
+			ward.setCapacity((in.nextInt()));
 			System.out.println("Enter the capacity of the ward: ");
-			ward.setCost((in.nextLine()));
+			ward.setCost((in.nextInt()));
 			System.out.println("Enter the cost of the ward: ");
-			ward.setResponsible_nurse((in.nextLine()));
+			ward.setResponsible_nurse((in.nextInt()));
 
 			String query = "INSERT INTO ward(ward_no ,capacity, cost, responsible_nurse ) VALUES(?,?,?,?);";
 			int res = WardInfoProcDAO.executeInsert(query, ward);
@@ -67,8 +67,8 @@ public class WardInfoProcess {
 			Ward ward = new Ward();
 			Scanner in = new Scanner(System.in);
 			System.out.println("Enter the ward_number of the ward you want to delete: ");
-			ward.setWardNo(in.nextLine());
-			
+			ward.setWardNo(in.nextInt());
+
 			String queryDel = "DELETE from ward WHERE ward_no = " + ward.getWardNo();
 			int result = WardInfoProcDAO.updateDatabase(queryDel);
 
@@ -92,18 +92,17 @@ public class WardInfoProcess {
 			Ward ward = new Ward();
 			Scanner in = new Scanner(System.in);
 			System.out.println("Enter the ward_number of the ward you want to update: ");
-			ward.setWardNo(in.nextLine());
+			ward.setWardNo(in.nextInt());
 
 			String query = "SELECT * from ward where id =" + ward.getWardNo();
 			ResultSet result = WardInfoProcDAO.queryDatabase(query);
 
-			String wardNo, capacity, cost, responsible_nurse;
+			int capacity, cost, responsible_nurse;
 
 			if (result.next()) {
-				// wardNo = result.getString("ward_no");
-				capacity = result.getString("capacity");
-				cost = result.getString("cost");
-				responsible_nurse = result.getString("responsible_nurse");
+				capacity = result.getInt("capacity");
+				cost = result.getInt("cost");
+				responsible_nurse = result.getInt("responsible_nurse");
 
 			} else {
 				System.out.println("No such ward exist");
@@ -114,14 +113,14 @@ public class WardInfoProcess {
 			String y_n = in.nextLine();
 			if (y_n.equals("y") || y_n.equals("Y")) {
 				System.out.println("Enter the new SSN:");
-				capacity = in.nextLine();
+				capacity = in.nextInt();
 			}
 			System.out.println("Old value for cost:" + cost);
 			System.out.println("Do you want to update it?");
 			y_n = in.nextLine();
 			if (y_n.equals("y") || y_n.equals("Y")) {
 				System.out.println("Enter the new name:");
-				cost = in.nextLine();
+				cost = in.nextInt();
 			}
 			System.out.println("Old value for responsible_nurse:" + responsible_nurse); // Is it okay to use String when
 																						// DB is int?
@@ -129,7 +128,7 @@ public class WardInfoProcess {
 			y_n = in.nextLine();
 			if (y_n.equals("y") || y_n.equals("Y")) {
 				System.out.println("enter the new SSN:");
-				responsible_nurse = in.nextLine();
+				responsible_nurse = in.nextInt();
 			}
 
 		} catch (Exception e) {
