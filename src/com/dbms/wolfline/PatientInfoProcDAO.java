@@ -25,7 +25,6 @@ public class PatientInfoProcDAO {
 	public static int executeInsert(String query, Patient patient) {
 		
 		int result = -1;
-		int count = -1;
 		
 		if (connection == null) {
 			System.err.println("No connection to the database exists.");
@@ -35,7 +34,6 @@ public class PatientInfoProcDAO {
 		try {
 			
 			PreparedStatement stmt=connection.prepareStatement(query);
-			result = stmt.executeUpdate(query);
 			
 			stmt.setString(1, patient.getId());
 			stmt.setString(2, patient.getSsn());
@@ -49,16 +47,16 @@ public class PatientInfoProcDAO {
 			stmt.setString(3, patient.getCompleting_treatment());
 			
 			//Number of rows affected
-			 count=stmt.executeUpdate();
+			 result=stmt.executeUpdate();
 			
 		} catch (Exception e) {
 			System.err.println("Message: " + e.getMessage());
 			System.out.println("Executing query failed.");
 		}
-		return count;
+		return result;
 		
 	}
-	
+	//Select * from
 	public static ResultSet queryDatabase(String query) {
 		Statement statement = null;
 		ResultSet result = null;
@@ -81,6 +79,8 @@ public class PatientInfoProcDAO {
 		return result;
 	}
 	
+	
+	//Update, insert
 	public static int updateDatabase(String query){
 		Statement statement = null;
 		int result = -1;

@@ -27,12 +27,12 @@ public class WardInfoProcDAO {
 
 		try {
 			PreparedStatement stmt = connection.prepareStatement(query);
-			result = stmt.executeUpdate(query);
-
-			stmt.setString(1, ward.getWardNo());
-			stmt.setString(2, ward.getCapacity());
-			stmt.setString(3, ward.getCost());
-			stmt.setString(4, ward.getResponsible_nurse());
+			
+			stmt.setInt(1, ward.getWardNo());
+			stmt.setInt(2, ward.getCapacity());
+			stmt.setInt(3, ward.getCost());
+			stmt.setInt(4, ward.getResponsible_nurse());
+			result = stmt.executeUpdate();
 
 		} catch (Exception e) {
 			System.err.println("Message: " + e.getMessage());
