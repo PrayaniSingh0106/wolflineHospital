@@ -199,8 +199,8 @@ public class PatientInfoProcess {
 			patient.setSsn(in.nextLine());
 			System.out.println("Enter the name of the patient: ");
 			patient.setName(in.nextLine());
-			System.out.println("Enter the dob of the patient: ");
-			patient.setDob(in.nextLine());
+			System.out.println("Enter the dob of the patient in yyyy-MM-dd format: ");
+			patient.setDob(java.sql.Date.valueOf(in.nextLine()));
 			System.out.println("Enter the gender of the patient: ");
 			patient.setGender(in.nextLine());
 			System.out.println("Enter the phone of the patient: ");
