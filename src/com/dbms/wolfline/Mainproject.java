@@ -8,9 +8,9 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 public class Mainproject {
-	private static final String jdbcURL = "jdbc:mariadb://localhost:3303/hospital";
-	private static final String user = "root";
-	private static final String password = "root";
+	private static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/psingh25";
+	private static final String user = "psingh25";
+	private static final String password = "200251108";
 
 	private static Connection connection = null;
 	private static Statement statement = null;
