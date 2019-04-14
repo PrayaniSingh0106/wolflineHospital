@@ -11,7 +11,7 @@ public class StaffInfoProc {
 			int choice = 0;
 
 			while (choice != 4) {
-				System.out.println("Options:\n1.Enter details for new Staff" + "\n2.Update patient Staff"
+				System.out.println("Options:\n1.Enter details for new Staff" + "\n2.Update Staff's information"
 						+ "\n3.Delete a staff's information" + "\n4.Exit");
 				System.out.print(">>");
 				choice = in.nextInt();
@@ -38,9 +38,9 @@ public class StaffInfoProc {
 
 			Staff staff = new Staff();
 			Scanner in = new Scanner(System.in);
-			
+
 			System.out.println("Enter the Staff's Id of the staff, who's information you want to delete: ");
-			
+
 			staff.setId(in.nextInt());
 
 			String queryDel = "DELETE from staff WHERE id = " + staff.getId();
@@ -65,7 +65,7 @@ public class StaffInfoProc {
 
 			Staff staff = new Staff();
 			Scanner in = new Scanner(System.in);
-			System.out.println("Enter the ID of the patient you want to update");
+			System.out.println("Enter the ID of the staff you want to update");
 			staff.setId(in.nextInt());
 
 			String query = "SELECT * from staff where id =" + staff.getId();
@@ -86,7 +86,7 @@ public class StaffInfoProc {
 				address = result.getString("address");
 
 			} else {
-				System.out.println("No such patient patient exsist");
+				System.out.println("No such staff exsist");
 				return;
 			}
 			System.out.println("Old value for name:" + name);
@@ -148,11 +148,11 @@ public class StaffInfoProc {
 				System.out.println("enter the new address:");
 				address = in.nextLine();
 			}
-			
+
 			String query1 = "UPDATE staff" + " SET id = '" + id + "', name = '" + name + "', age = '" + age
-					+ "', gender = '" + gender + "', job_title = '" + job_title + "', professional_title = '" + professional_title
-					+ "', department = '" + department + "', phone = '" + phone + " address = '" + address
-					+ "')" + "where id = " + staff.getId();
+					+ "', gender = '" + gender + "', job_title = '" + job_title + "', professional_title = '"
+					+ professional_title + "', department = '" + department + "', phone = '" + phone + " address = '"
+					+ address + "')" + "where id = " + staff.getId();
 			int result1 = StaffInfoProcDAO.updateDatabase(query1);
 
 			if (result1 == 1) {
@@ -169,44 +169,44 @@ public class StaffInfoProc {
 
 	private static void enterNewStaff() {
 		// TODO Auto-generated method stub
-		 
+
 		try {
 
 			Staff staff = new Staff();
-			
+
 			Scanner in = new Scanner(System.in);
-			System.out.println("Enter the ID of the patient: ");
+			System.out.println("Enter the ID of the staff: ");
 			int id = in.nextInt();
 			staff.setId(id);
-			
-			System.out.println("Enter the name of the patient: ");
+
+			System.out.println("Enter the name of the staff: ");
 			staff.setName(in.nextLine());
-			
-			System.out.println("Enter the age of the patient: ");
+
+			System.out.println("Enter the age of the staff: ");
 			staff.setAge(in.nextInt());
-			
-			System.out.println("Enter the gender of the patient: ");
+
+			System.out.println("Enter the gender of the staff: ");
 			staff.setGender(in.nextLine());
-			
-			System.out.println("Enter the job_title of the patient: ");
+
+			System.out.println("Enter the job_title of the staff: ");
 			staff.setJobTitle(in.nextLine());
-			
-			System.out.println("Enter the professional_title of the patient: ");
+
+			System.out.println("Enter the professional_title of the staff: ");
 			staff.setProfessionalTitle(in.nextLine());
-			
-			System.out.println("Enter the department of the patient: ");
+
+			System.out.println("Enter the department of the staff: ");
 			staff.setDepartment(in.nextLine());
-			
-			System.out.println("Enter the phone of the patient: ");
+
+			System.out.println("Enter the phone of the staff: ");
 			staff.setPhone(in.nextLine());
-			
-			System.out.println("Enter the address of the patient: ");
+
+			System.out.println("Enter the address of the staff: ");
 			staff.setAddress(in.nextLine());
 
 			String query = "INSERT INTO staff(id, name, age, gender ,job_title ,professional_title ,department , phone, address) VALUES(?,?,?,?,?,?,?,?,?,?);";
-			
+
 			int result = StaffInfoProcDAO.executeInsert(query, staff);
-			System.out.println("Number of rows affected: result");
+			System.out.println("Number of rows affected: " + result);
 		}
 
 		catch (Exception e) {
