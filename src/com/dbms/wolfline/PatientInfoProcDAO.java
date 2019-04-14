@@ -35,7 +35,7 @@ public class PatientInfoProcDAO {
 			
 			PreparedStatement stmt=connection.prepareStatement(query);
 			
-			stmt.setString(1, patient.getId());
+			stmt.setInt(1, patient.getId());
 			stmt.setString(2, patient.getSsn());
 			stmt.setString(3, patient.getName());
 			stmt.setDate(4, patient.getDob());
@@ -67,11 +67,15 @@ public class PatientInfoProcDAO {
 		}
 
 		try {
+			System.out.println("Connecting to DB dao");
+			
 			statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		} catch (Exception e) {
 			System.out.println("Creating statement failed");
 		}
 		try {
+			System.out.println("Querying to DB dao");
+			
 			result = statement.executeQuery(query);
 		} catch (Exception e) {
 			System.out.println("Executing query failed.");
