@@ -40,14 +40,16 @@ public class PatientInfoProcess {
 
 			Patient patient = new Patient();
 			Scanner in = new Scanner(System.in);
-			System.out.println("Enter the patient's Id of the patient you want to delete: ");
-			patient.setId(in.nextLine());
+			System.out.println("Enter the Id of the patient you want to delete: ");
+			patient.setId(in.nextInt());
 
+			//Also, free ward
 			String queryDel = "DELETE from patient WHERE id = " + patient.getId();
 			int result = PatientInfoProcDAO.updateDatabase(queryDel);
 
+			
 			if (result == 0) {
-				System.out.println("No such ward exsist.\n");
+				System.out.println("No such patient exsist.\n");
 			} else {
 				System.out.println(result + " number of row(s) affected.\n");
 			}
@@ -66,7 +68,9 @@ public class PatientInfoProcess {
 			Patient patient = new Patient();
 			Scanner in = new Scanner(System.in);
 			System.out.println("Enter the ID of the patient you want to update");
-			patient.setId(in.nextLine());
+			patient.setId(in.nextInt());
+
+			System.out.println("The ID entered is " + patient.getId());
 
 			String query = "SELECT * from patient where id =" + patient.getId();
 			ResultSet result = PatientInfoProcDAO.queryDatabase(query);
@@ -193,8 +197,7 @@ public class PatientInfoProcess {
 
 			Scanner in = new Scanner(System.in);
 			System.out.println("Enter the ID of the patient: ");
-			String id = in.nextLine();
-			patient.setId(id);
+			patient.setId(in.nextInt());
 			System.out.println("Enter the ssn of the patient: ");
 			patient.setSsn(in.nextLine());
 			System.out.println("Enter the name of the patient: ");
@@ -210,18 +213,9 @@ public class PatientInfoProcess {
 			System.out.println("Enter the treatment_plan of the patient: ");
 			patient.setTreatment_plan(in.nextLine());
 			System.out.println("Enter the in_ward of the patient: ");
-			patient.setIn_ward(Integer.parseInt(in.nextLine()));
+			patient.setIn_ward(in.nextInt());
 			System.out.println("Enter the Completing_treatment of the patient: ");
 			patient.setTreatment_plan(in.nextLine());
-
-			/*
-			 * if(patient_id==null||patient_ssn==null||patient_name==null||patient_dob==null
-			 * ||patient_gender==null) { System.out.
-			 * println("patient_id, patient_ssn, patient_name, patient_dob and patient_gender can't be null. "
-			 * );
-			 * 
-			 * }
-			 */
 
 			String query = "INSERT INTO patient(id, ssn, name, dob, gender, phone, address, treatment_plan, completing_treatment) VALUES(?,?,?,?,?,?,?,?,?)";
 			int result = PatientInfoProcDAO.executeInsert(query, patient);
