@@ -23,7 +23,10 @@ public class Mainproject {
 			connection = DriverManager.getConnection(jdbcURL, user, password);
 
 			QueryExecutor.setConnection(connection);
-
+			PatientInfoProcDAO.setConnection(connection);
+			StaffInfoProcDAO.setConnection(connection);
+			WardInfoProcDAO.setConnection(connection);
+			
 			int choice = 0;
 			while (choice != 5) {
 				Scanner in = new Scanner(System.in);
@@ -59,10 +62,10 @@ public class Mainproject {
 						switch(ipChoice) {
 							
 						case 1:
-							PatientInfoProcess.TaskMenu();
+							StaffInfoProc.TaskMenu();
 							break;
 						case 2:
-							StaffInfoProc.TaskMenu();
+							PatientInfoProcess.TaskMenu();
 							break;
 						case 3:
 							WardInfoProcess.TaskMenu();
