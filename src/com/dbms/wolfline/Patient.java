@@ -3,17 +3,8 @@ package com.dbms.wolfline;
 import java.sql.Date;
 
 public class Patient {
-//	| ssn                  | varchar(20)  | NO   |     | NULL    |       |
-		//	| name                 | varchar(20)  | NO   |     | NULL    |       |
-		//	| dob                  | date         | NO   |     | NULL    |       |
-		//	| gender               | char(1)      | NO   |     | NULL    |       |
-		//	| phone                | varchar(15)  | YES  |     | NULL    |       |
-		//	| address              | varchar(100) | YES  |     | NULL    |       |
-		//	| treatment_plan       | varchar(100) | YES  |     | NULL    |       |
-		//	| in_ward              | int(11)      | YES  |     | NULL    |       |
-		//	| Completing_treatment | varchar(3)   | YES  |     | NULL   
-	
-	private String id;
+
+	private int id;
 	private String ssn;
 	private String name;
 	private Date dob;
@@ -24,10 +15,10 @@ public class Patient {
 	private int in_ward;
 	private String Completing_treatment;
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String string) {
+	public void setId(int string) {
 		this.id = string;
 	}
 	public String getSsn() {
